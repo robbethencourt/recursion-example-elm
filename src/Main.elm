@@ -88,7 +88,7 @@ view model =
             , div []
                 [ button
                     []
-                    [ text "implement new list click" ]
+                    [ text "Update List" ]
                 ]
             ]
         ]
