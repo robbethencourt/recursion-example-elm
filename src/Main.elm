@@ -107,7 +107,6 @@ view model =
             , div []
                 [ button
                     [ onClick NewList ]
-                    []
                     [ text "Update List" ]
                 ]
             ]
