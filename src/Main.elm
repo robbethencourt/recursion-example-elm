@@ -2,7 +2,7 @@ module Main exposing (..)
 
 import Html exposing (Html, text, div, p, button, h5, input)
 import Html.Attributes exposing (class, style, type_)
-import Html.Events exposing (onClick)
+import Html.Events exposing (onClick, onInput)
 
 
 ---- MODEL ----
@@ -11,6 +11,7 @@ import Html.Events exposing (onClick)
 type alias Model =
     { myList : List Int
     , reduced : Int
+    , inputNumber : Int
     }
 
 
@@ -18,6 +19,7 @@ init : ( Model, Cmd Msg )
 init =
     ( { myList = List.range 1 3
       , reduced = 0
+      , inputNumber = 0
       }
     , Cmd.none
     )
@@ -30,6 +32,8 @@ init =
 type Msg
     = ReduceIt
     | ClearIt
+    | UpdateInput String
+    | NewList
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -45,6 +49,20 @@ update msg model =
         ClearIt ->
             ( { model
                 | reduced = 0
+              }
+            , Cmd.none
+            )
+
+        UpdateInput inputNumber ->
+            ( { model
+                | inputNumber = Result.withDefault 0 (String.toInt inputNumber)
+              }
+            , Cmd.none
+            )
+
+        NewList ->
+            ( { model
+                | myList = List.range 0 model.inputNumber
               }
             , Cmd.none
             )
@@ -78,6 +96,20 @@ view model =
                 , onClick ClearIt
                 ]
                 [ text "Clear It" ]
+            , div []
+                [ input
+                    [ type_ "number"
+                    , onInput UpdateInput
+                    , style [ ( "width", "50%" ) ]
+                    ]
+                    []
+                ]
+            , div []
+                [ button
+                    [ onClick NewList ]
+                    []
+                    [ text "Update List" ]
+                ]
             ]
         ]
 
