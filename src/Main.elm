@@ -17,7 +17,7 @@ type alias Model =
 
 init : ( Model, Cmd Msg )
 init =
-    ( { myList = List.range 1 7
+    ( { myList = List.range 1 3
       , reduced = 0
       , inputNumber = 0
       }
