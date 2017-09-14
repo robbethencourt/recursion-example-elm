@@ -16,7 +16,7 @@ type alias Model =
 
 init : ( Model, Cmd Msg )
 init =
-    ( { myList = List.range 1 7
+    ( { myList = List.range 1 3
       , reduced = 0
       }
     , Cmd.none
@@ -78,18 +78,6 @@ view model =
                 , onClick ClearIt
                 ]
                 [ text "Clear It" ]
-            , div []
-                [ input
-                    [ type_ "number"
-                    , style [ ( "width", "50%" ) ]
-                    ]
-                    []
-                ]
-            , div []
-                [ button
-                    []
-                    [ text "Update List" ]
-                ]
             ]
         ]
 
